@@ -23,6 +23,7 @@ export default function Addbuyer() {
     const handleOnSubmit= (e) =>{
         e.preventDefault()
         let flag = false
+        
         dispatch(showBuyer())
         .then(data=>{
             data.forEach(el => {
@@ -31,6 +32,14 @@ export default function Addbuyer() {
                     flag = true
                 }
             })
+            if(input.type === ""){
+                swal("Choice Type","", "error");
+                flag = true
+            }
+            if(input.name === ""){
+                swal("Input Name","", "error");
+                flag = true
+            }
             if(!flag){
                 dispatch(addBuyer(input))
                 swal("Okay", "Create Success", "success");
