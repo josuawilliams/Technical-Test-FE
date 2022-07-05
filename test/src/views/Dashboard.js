@@ -23,7 +23,7 @@ export default function Dashboard() {
     if(isLoading) return <div className="contain"><div className="loader"></div></div>
     return (
         <>
-            <div className="ml-[18rem] flex flec-row">
+            <div className="ml-[18rem] flex flex-row">
                 <div className="flex flex-wrap mt-3">
                     <Card data={item}/>
                 </div>

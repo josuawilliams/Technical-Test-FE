@@ -1,5 +1,4 @@
 
-
 export default function Card({ data }) {
     return (
         <>
@@ -13,11 +12,10 @@ export default function Card({ data }) {
                         </p> */}
                     </div>
                     <div className="px-5">
-                    <span className="inline-block bg-cyan-400 bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">PRICE</span>
+                    <span className="inline-block bg-cyan-500 bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">PRICE</span>
                     </div>
                     {el.prices.map(el=>{
-                        console.log(el);
-                    return <div className="px-5 pt-1">
+                    return <div className="px-5">
                         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{el.priceFor}: Rp {el.price}</span>
                     </div>
                     })}
