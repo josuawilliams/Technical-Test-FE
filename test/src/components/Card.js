@@ -16,7 +16,9 @@ export default function Card({ data }) {
                     </div>
                     {el.prices.map(el=>{
                     return <div className="px-5">
-                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{el.priceFor}: Rp {el.price}</span>
+                    {el.priceFor=="regular"?  <span className="inline-block bg-gray-400 bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{el.priceFor}: Rp {el.price}</span> : ""}
+                    {el.priceFor=="wholesale"?  <span className="inline-block bg-red-500 bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{el.priceFor}: Rp {el.price}</span> : ""}
+                    {el.priceFor=="VIP"? <span className="inline-block bg-amber-600 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{el.priceFor}: Rp {el.price}</span>: ""}
                     </div>
                     })}
                 </div>

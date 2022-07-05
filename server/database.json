@@ -51,15 +51,15 @@
       "prices": [
         {
           "price": 7000,
-          "priceFor": "fghfg"
+          "priceFor": "VIP"
         },
         {
           "price": 8000,
-          "priceFor": "fghfg"
+          "priceFor": "regular"
         },
         {
           "price": 8000,
-          "priceFor": "fghfg"
+          "priceFor": "wholesale"
         }
       ],
       "id": 4
