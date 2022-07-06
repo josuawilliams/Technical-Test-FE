@@ -17,6 +17,7 @@ export default function Summary() {
             .finally(() => {
                 setLoading(false)
             })
+            
     }, [])
     if (isLoading) return <div className="contain"><div className="loader"></div></div>
     return (

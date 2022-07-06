@@ -121,19 +121,29 @@
     "revenue": 1660000,
     "bestSpenders": [
       {
-        "name": "Dipta",
-        "type": "wholesale",
-        "spent": 1500000
+        "name": "Ani",
+        "type": "regular",
+        "spent": 20000
       },
       {
         "name": "Ani",
         "type": "regular",
-        "spent": 120000
+        "spent": 50000
+      },
+      {
+        "name": "Ani",
+        "type": "regular",
+        "spent": 50000
       },
       {
         "name": "Budi",
         "type": "VIP",
         "spent": 40000
+      },
+      {
+        "name": "Dipta",
+        "type": "wholesale",
+        "spent": 1500000
       }
     ]
   }

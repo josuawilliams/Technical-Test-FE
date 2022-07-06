@@ -9,19 +9,19 @@ import swal from "sweetalert"
 
 export default function Transaction() {
     const [dataBuyer, setDataBuyer] = useState([])
-    const [input , setInput] = useState({
+    const [input, setInput] = useState({
         item: "",
         qty: "",
         buyer: ""
     })
     const dispatch = useDispatch()
-    const data = useSelector((state)=> state.items.items)
+    const data = useSelector((state) => state.items.items)
     useEffect(() => {
         dispatch(dataItem())
         dispatch(getDataBuyer())
-        .then(data=>{
-            setDataBuyer(data)
-        })
+            .then(data => {
+                setDataBuyer(data)
+            })
     }, [])
 
     const handleOnChange = (e) => {
@@ -35,28 +35,35 @@ export default function Transaction() {
     const handleOnSubmit = (e) => {
         e.preventDefault()
         let dataTransaction;
-        if(+input.qty <= 0 || input.item === "" || input.buyer === ""){
+        if (+input.qty <= 0 || input.item === "" || input.buyer === "") {
             swal("Something wrong", "There Is Empty Field Or Quantity Below Zero", "error")
-        }else{  
+        } else {
             dispatch(updateDataTransaction(input))
-            .then(data=>{
-                swal("Success", "Data Transaction has been added", "success")
-            })
+                .then(data => {
+                    swal("Success", "Data Transaction has been added", "success")
+                })
+            dispatch(getDataTransaction())
+                .then(data => {
+                    dataTransaction = data
+                })
+                .finally(() => {
+                    dispatch(UpdateSummaryData(dataTransaction, data, dataBuyer))
+                })
         }
         dispatch(getDataTransaction())
-        .then(data=>{
-            dataTransaction = data
-        })
-        .finally(()=>{
-            dispatch(UpdateSummaryData(dataTransaction, data, dataBuyer))
-        })
+            .then(data => {
+                dataTransaction = data
+            })
+            .finally(() => {
+                dispatch(UpdateSummaryData(dataTransaction, data, dataBuyer))
+            })
     }
 
 
 
 
 
-    if(dataBuyer.length===0){
+    if (dataBuyer.length === 0) {
         return <div className="contain"><div className="loader"></div></div>
     }
     return (
@@ -66,7 +73,7 @@ export default function Transaction() {
                 <form>
                     <select name="item" value={input.item} onChange={handleOnChange} id="underline_select" className="relative block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                         <option selected disabled value="">Select One Name Item</option>
-                        {data.map(el=>{
+                        {data.map(el => {
                             return <option value={el.name}>{el.name}</option>
                         })}
                     </select><br />
@@ -77,11 +84,11 @@ export default function Transaction() {
                     </div>
 
                     <select name="buyer" value={input.buyer} onChange={handleOnChange} id="underline_select" className="relative block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                        <option selected disabled value="">Select One Type</option>
-                        {dataBuyer.map(el=>{
+                        <option selected disabled value="">Select One Buyer</option>
+                        {dataBuyer.map(el => {
                             return <option value={el.name}>{el.name}</option>
                         })}
-                        
+
                     </select><br />
 
                     <button onClick={handleOnSubmit} type="submit" className="absolute text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>

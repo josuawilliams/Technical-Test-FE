@@ -1,12 +1,26 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getDataTransaction } from "../store/actionfetch/Transaction"
+import { UpdateSummaryData } from "../store/actionfetch/summary"
+import swal from "sweetalert"
+import { dataItem } from "../store/actionfetch/dataItem"
+import { getDataBuyer } from "../store/actionfetch/Transaction"
+
 
 export default function Historytransaction() {
     const [dataHistory, setDataHistory] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [dataBuyer, setDataBuyer] = useState([])
+
+
     const dispatch = useDispatch()
+    const dataitems = useSelector((state)=> state.items.items)
     useEffect(() => {
+        dispatch(dataItem())
+        dispatch(getDataBuyer())
+        .then(data=>{
+            setDataBuyer(data)
+        })
         dispatch(getDataTransaction())
             .then(data => {
                 setDataHistory(data)
@@ -18,6 +32,29 @@ export default function Historytransaction() {
                 setIsLoading(false)
             })
     }, [])
+
+    let dataTransaction;
+    const handdleDelete = (e, id) =>{
+        e.preventDefault()
+        fetch(`http://localhost:3000/Transaction/${id}`, {
+            method : "DELETE"
+        })
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("error fetch")
+            }
+            return res.json()
+        })
+        .then(data=>{
+            swal("Good job!", "Success Delete", "success");
+            setDataHistory(dataHistory.filter(el=>el.id !== id))
+            dispatch(getDataTransaction())
+            .then(data=>{
+                dataTransaction = data
+                dispatch(UpdateSummaryData(dataTransaction, dataitems, dataBuyer))
+            })
+        })
+    }
 
     if (isLoading) return <div className="contain"><div className="loader"></div></div>
     return (
@@ -58,7 +95,7 @@ export default function Historytransaction() {
                                                 <div className="text-sm text-gray-500">{el.buyer}</div>
                                             </td>
                                             <td className="px-6 py-4 ">
-                                                <a href="" className=" px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">Delete</a>
+                                                <a href="" onClick={(e) => handdleDelete(e,el.id)} className=" px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full">Delete</a>
                                             </td>
                                         </tr>
                                     })}
