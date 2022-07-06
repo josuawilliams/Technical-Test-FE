@@ -44,25 +44,6 @@
           "price": 50000
         }
       ]
-    },
-    {
-      "name": "fdgdf",
-      "type": "fdgdf",
-      "prices": [
-        {
-          "price": 7000,
-          "priceFor": "VIP"
-        },
-        {
-          "price": 8000,
-          "priceFor": "regular"
-        },
-        {
-          "price": 8000,
-          "priceFor": "wholesale"
-        }
-      ],
-      "id": 4
     }
   ],
   "Buyers": [
